@@ -1,0 +1,953 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Zero To Hero Fast API</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="de063102-7b2a-4966-a4ee-0854b2f11d38" class="page sans"><header><h1 class="page-title">Zero To Hero Fast API</h1></header><div class="page-body"><p id="b9bf3540-b5ce-4877-8132-127f19d6708a" class="">
+</p><p id="24ee75d2-05aa-4d35-9d34-10ec89f499c1" class="">
+</p><ul id="a2eb19f4-324a-4891-914a-56558b91cb57" class="toggle"><li><details open=""><summary><mark class="highlight-red"><strong>Python 3.9 Kurulum</strong></mark></summary><p id="d3417a78-531e-41e5-bb3c-b75a7bfcef27" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4374eed2-f7c6-477b-8971-a515a6a35c47"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Kurulum için gerekli komutlar.<pre id="808110e7-adf7-477d-bc97-26489cadcf61" class="code code-wrap"><code>apt install -y python3.9-dev htop wget curl net-tools iptraf python3-distutils python3-yaml
+curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py; python3.9 /tmp/get-pip.py pip</code></pre></div></figure><p id="d01210f0-f734-45a7-a239-5ce8e452515c" class="">
+</p></details></li></ul><ul id="615dd543-987d-4a5f-ae5b-fff72e9a092e" class="toggle"><li><details open=""><summary><mark class="highlight-red"><strong>PostgreSQL Kurulum</strong></mark></summary><p id="7d0a30b9-70f2-4e78-927a-4aff7e58e3ff" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="85f24929-9681-4749-b515-2d5852878507"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Postgresql Kurulum<pre id="8a6171a9-2fda-4be4-80e1-88925de57c2f" class="code code-wrap"><code>echo &quot;deb http://apt.postgresql.org/pub/repos/apt focal-pgdg main&quot; &gt; /etc/apt/sources.list.d/postgresql_14_focal.list
+wget -q -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+apt update
+apt upgrade -y
+apt install -y python3-psycopg2 libpq-dev postgresql-14 postgresql-client-14 postgresql-contrib-14 libdbd-pg-perl libpq-dev
+clear
+systemctl stop postgresql</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0469ce9c-4003-4b4f-aa59-5a4e073270ab"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Ayarlar
+<pre id="06e7edda-6881-4d5c-8360-455a546ec89d" class="code code-wrap"><code>cat &lt;&lt;EOT&gt;/etc/postgresql/14/main/pg_hba.conf
+local       all             all                                     trust
+host        all             all             127.0.0.1/32            md5
+host        all             all             0.0.0.0/0               md5
+EOT
+</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="94f5f10d-f3f6-4b73-8035-5e486438976a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Örnek tablo ve kullanıcı oluşturma
+<pre id="820fcc92-2b73-4e90-ad68-fd7cc9ba3a65" class="code code-wrap"><code>sudo -i -u postgres psql -c &quot;ALTER USER postgres WITH PASSWORD &#x27;DB-PASSWORD&#x27;;&quot;
+sudo -i -u postgres psql -c &#x27;GRANT ALL ON ALL TABLES IN SCHEMA public to DB-USERNAME;&#x27;
+sudo -i -u postgres psql -c &#x27;GRANT ALL ON ALL SEQUENCES IN SCHEMA public to DB-USERNAME;&#x27;
+sudo -i -u postgres psql -c &#x27;GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to DB-USERNAME;&#x27;
+sudo -i -u postgres psql -c &#x27;CREATE DATABASE DB-NAME;&#x27;</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2fe6c0ef-52dd-495d-bcd9-b9b0e63f9428"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Postgresql servisi yeniden başlat<pre id="5f60b91a-4c07-490e-8b4d-35efe5dfdfad" class="code code-wrap"><code>
+
+cat &lt;&lt;EOT&gt;/etc/postgresql/14/main/pg_hba.conf
+local       all             all                                     md5
+host        all             all             127.0.0.1/32            md5
+host        all             all             0.0.0.0/0               md5
+EOT
+
+
+systemctl restart postgresql</code></pre></div></figure><p id="98c70ac9-115a-482e-bd0e-38f85d0176dd" class="">
+</p><p id="ec9457c8-e9f0-451e-b259-e6be66cbdf5d" class="">
+</p><p id="c5a69694-44df-4249-945b-d5aaa0d28f84" class="">
+</p></details></li></ul><ul id="17ed038e-dd30-40f0-990a-b10c76748c89" class="toggle"><li><details open=""><summary><mark class="highlight-red"><strong>Yeni Proje Oluşturma</strong></mark></summary><p id="faaf46ff-c171-40f9-b9b6-b4e34f4c99d1" class="">PyCharm uygulamamızı çalıştırarak.Yeni proje oluşturmaya başlıyoruz. Aşağıdaki adımları takip ederek projemizi oluşturabiliriz.</p><figure id="bf51dfc9-1b8d-44cc-8fbe-b3a6d707bc1e" class="image"><a href="Zero%20To%20Hero%20Fast%20API%20de0631027b2a4966a4ee0854b2f11d38/1.png"><img style="width:480px" src="Zero%20To%20Hero%20Fast%20API%20de0631027b2a4966a4ee0854b2f11d38/1.png"/></a></figure><figure id="c1d83c77-6031-42ff-be6b-019689721f9c" class="image"><a href="Zero%20To%20Hero%20Fast%20API%20de0631027b2a4966a4ee0854b2f11d38/2.png"><img style="width:480px" src="Zero%20To%20Hero%20Fast%20API%20de0631027b2a4966a4ee0854b2f11d38/2.png"/></a></figure><p id="1f82806d-4bef-4582-b71b-a3e478cd667c" class="">
+</p></details></li></ul><ul id="425ba596-2802-44df-ac36-d6891121fbb2" class="toggle"><li><details open=""><summary><mark class="highlight-red"><strong>Proje Oluşturulduktan Sonra İlk Yapılması Gerekenler</strong></mark></summary><p id="4e9221e0-8034-4dab-b0e3-b4876a8ca0cb" class="">
+</p><p id="a1a809f3-dbd3-4d3c-aa5a-a2d9b00d20de" class="">Projemizin içine bir kaç dosya eklememiz gerekiyor. Bunlar <code>models.py</code> <code>routers.py</code> <code>schemas.py</code> <code>main.py</code> ve <code>base_engine.py</code>. Bu dosyalarda proje içinde gerekli kodlamalar yapılacak.</p><p id="5a8bde9c-b3b0-4956-95d3-396430390aa9" class="">
+</p><ul id="8e3b2051-776a-4047-b48a-7170e1faca4b" class="bulleted-list"><li style="list-style-type:disc"><code>models.py</code>  → İçerisine projemizin veri tabanında kullanacağımız tabloları oluşturup şekillendireceğiz.</li></ul><ul id="18c5911c-4a71-40cd-9489-952c4efd6a3e" class="bulleted-list"><li style="list-style-type:disc"><code>routers.py</code> →… </li></ul><ul id="f4fb5909-440c-4c8d-a246-2417953d30d6" class="bulleted-list"><li style="list-style-type:disc"><code>schemas.py</code> →Aldığımız verileri doğrulamak ve istemciye/tarayıcıya göndermek istediğimiz verileri yeniden biçimlendirmek için bir şema kullanılır.</li></ul><ul id="41b40bcf-f230-4eee-9a52-4db075e7121a" class="bulleted-list"><li style="list-style-type:disc"><code>main.py</code> →...</li></ul><ul id="0a70409d-5bf0-4753-b757-3bcb9ad923ac" class="bulleted-list"><li style="list-style-type:disc"><code>base_engine.py</code> →Veritabanı bağlantımızı oluşturacağımız dosya.</li></ul><p id="e1c5ff47-08f0-47c0-bd8c-d561306c698f" class="">
+</p><p id="9bd43277-8ea8-4e7f-94cb-49c499b66a18" class="">
+</p></details></li></ul><ul id="1840aee3-7430-473a-b44f-7bc1888c7aa1" class="toggle"><li><details open=""><summary><mark class="highlight-red"><strong>Proje Dosyaları</strong></mark></summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a6e1f1c0-3eb5-4425-a8fa-cdfbe1901d4e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">base_engine.py<pre id="58a8f99a-f4ef-4760-ab9b-a0abf36c4453" class="code code-wrap"><code># region Imports
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+# endregion
+
+# region Engine
+
+&#x27;&#x27;&#x27; Oluşturduğumuz Veri tabanına bağlantı sağlamak.&#x27;&#x27;&#x27;
+
+engine = create_engine(&quot;postgresql://DB-USERNAME:DB-PASSWORD@DB-IP:DB-PORT/DB-NAME&quot;, pool_size=2000, max_overflow=0)
+conn = engine.connect()
+SessionLocal = sessionmaker(bind=engine)
+Base = declarative_base()
+# endregion</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7c2bead7-dd85-4a5d-8f6f-eb4e944e4785"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">models.py<pre id="f2d54634-934f-4ad0-92e5-958124886467" class="code code-wrap"><code># region Imports
+from fastapi import APIRouter
+from pydantic import BaseModel
+from sqlalchemy import Column, Integer, String, Text, func, Boolean, DateTime
+from base_engine import Base
+
+router = APIRouter()
+# endregion
+
+
+&#x27;&#x27;&#x27;
+Schemas
+&#x27;&#x27;&#x27;
+class CreateArticle(BaseModel):
+    title: str
+    content: str
+    read_time: int = None
+    is_active: bool = True
+
+
+&#x27;&#x27;&#x27;
+Aşağıdaki tabloyu önceden oluşturduğumuz veri tabanında oluşturmuş olmamız gerekiyor.
+Veri tabanındaki tablo ve alanları.
+&#x27;&#x27;&#x27;
+class mArticles(Base):
+    __tablename__ = &quot;articles&quot;
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    title = Column(String)
+    # Başlık alanı String değerde ve doldurulması zorunlu bir alan olarak oluşturuyoruz.
+    content = Column(Text)
+    # İçerik alanı Text değerde  ve doldurulması zorunlu bir alan olarak oluşturuyoruz.
+    read_time = Column(Integer,nullable=True)
+    # Okuma zamanı alanı Integer değerde ve boş geçilebilecek bir alan.
+    is_active = Column(Boolean)
+    # Aktif-pasif alanı Boolean değerde yalnızca içi geçerli değeri var (True/False) ve doldurulması zorunlu bir alan olarak oluşturuyoruz.
+    create_time = Column(DateTime, server_default=func.now())
+    # Oluşturulma zamanı alanı Datetime değerde kayıt girerken gönderilmezse server zamanına göre otomatik olarak eklenecek.</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a1218776-5722-4272-9b52-1170a02ea1cf"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Yukarıdaki tabloyu oluşturmak için gerekli sql komutu.<pre id="ece47da8-399a-4559-9333-b84747b4806e" class="code code-wrap"><code>create table articles
+(
+    id                    serial primary key,
+    title varchar NOT NULL,
+    content text NOT NULL,
+    read_time               integer,
+    is_active              bool,
+    create_time      timestamp defaultnow()
+
+);</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0a1d28f3-176e-40b6-ac41-0387196778f1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">routers.py<pre id="604d9797-dea8-4bca-9c80-43db1d570811" class="code code-wrap"><code># region Imports
+
+from fastapi import APIRouter
+
+from base_engine import SessionLocal
+from models import ArticleInfo, mArticles
+
+router = APIRouter()
+
+
+# endregion
+
+# region Article
+
+## Create işlemleri için post methodu kullanılır.
+@router.post(&quot;/create/article&quot;, summary=&quot;Create Article&quot;)
+def create_article(article_info: ArticleInfo):
+    ## Veri tabanında işlem için oturum açan komut. Tüm işlemler bittikten sonra return den önce db.close() ile oturum düşürülebilir.
+    db = SessionLocal()
+
+    # Yeni kayıt oluşturmadan önce girilen kayıdın herhangi bir alanının olup olmadığı kontrolü yapılabilir
+    # Opsiyonel bir durumdur. İhtiyaç halinde yapılması gerekir.
+    check_record = db.query(mArticles).filter(mArticles.title == article_info.title).first()
+    if check_record: return {&#x27;status&#x27;: &#x27;article_title_exist&#x27;}
+
+    ### Tablonun alanları ve request ile gelen alanları birbirine eşitleyip kayıt oluşturuyoruz.
+    ### Fakat kayıt henüz tabloda oluşmadı
+    create_record = mArticles(
+        title=article_info.title,
+        content=article_info.content,
+        read_time=article_info.read_time,
+        is_active=article_info.is_active,
+    )
+
+    ## Kaydı tabloya ekleyen komut.
+    db.add(create_record)
+
+    ## Kaydı tabloya eklendikten sonra tabloyu kaydeden komut.
+    db.commit()
+
+    ## Tabloyu kaydettikten sonra veri tabanını yenileyen komut (opsiyonel).
+    db.refresh()
+
+    ## Tüm işlemler bittikten sonra yeni kaydın istenilen alanlarıyla birlikte döndürülecek mesaj
+    return {&#x27;status&#x27;: &#x27;created&#x27;, &#x27;id&#x27;: create_record.id, &#x27;title&#x27;: article_info.title}
+
+
+## Get/List işlemleri için get methodu kullanılır.
+@router.get(&quot;/get/article&quot;, summary=&quot;Get Article&quot;)
+def get_article(article_id: int):
+    ## Veri tabanında işlem için oturum açan komut. Tüm işlemler bittikten sonra return den önce db.close() ile oturum düşürülebilir.
+    db = SessionLocal()
+
+    ## Kaydın istenilen alanına göre tek bir kayıt döndürmek üzere yapılan sorgu.
+    ## id yerine tablonun diğer alanları da kullanılabilir.
+    check_record = db.query(mArticles).filter(mArticles.id == article_id).first()
+
+    ## Kayıt bulunamazsa döndürülecek mesaj.
+    if not check_record: return {&#x27;status&#x27;: &#x27;article_not_found&#x27;}
+
+    ## Sorguda eşleşen ve döndürülen kayıt.
+    return check_record
+
+
+## Get/List işlemleri için get methodu kullanılır.
+@router.get(&quot;/list/article&quot;, summary=&quot;List Article&quot;)
+def list_article():
+    ## Veri tabanında işlem için oturum açan komut. Tüm işlemler bittikten sonra return den önce db.close() ile oturum düşürülebilir.
+    db = SessionLocal()
+
+    ## Tüm kayıtları herhangi bir filtreleme olmadan döndüren bir sorgu.
+    check_record = db.query(mArticles).all()
+
+    ## Örneğin sadece aktif kayıtlar getirilmek istenilseydi
+    # check_record = db.query(mArticles).filter(mArticles.is_active == True).all()
+
+    ## Kayıt bulunamazsa döndürülecek mesaj.
+    if not check_record: return {&#x27;status&#x27;: &#x27;article_not_found&#x27;}
+
+    ## Sorgu sonucu dönen kayıt veya kayıtlar.
+    return check_record
+
+
+## Update işlemleri için put methodu kullanılır.
+@router.put(&quot;/update/article&quot;, summary=&quot;Update Article&quot;)
+def update_article(article_id: int, article_info: ArticleInfo):
+    ## Veri tabanında işlem için oturum açan komut. Tüm işlemler bittikten sonra return den önce db.close() ile oturum düşürülebilir.
+    db = SessionLocal()
+
+    ## Kaydın istenilen alanına göre tek bir kayıt döndürmek üzere güncellenecek kaydı bulmak için yapılan sorgu.
+    ## id yerine tablonun diğer alanları da kullanılabilir.
+    check_record = db.query(mArticles).filter(mArticles.id == article_id).first()
+
+    ## Kayıt bulunamazsa döndürülecek mesaj.
+    if not check_record: return {&#x27;status&#x27;: &#x27;article_not_found&#x27;}
+
+    ## Bulunan güncellenmemiş kaydın yeni gelen alanlarla birbirine eşleştirilip güncellenmesi
+    check_record.title = article_info.title
+    check_record.content = article_info.content
+    check_record.read_time = article_info.read_time
+    check_record.is_active = article_info.is_active
+
+    ## Güncelleme işlemini veritabanında kaydeden komut
+    db.commit()
+
+    ## Tabloyu kaydettikten sonra veri tabanını yenileyen komut (opsiyonel).
+    db.refresh()
+
+    ## İşlem sonrası döndürülecek mesaj.
+    return {&#x27;status&#x27;: &#x27;updated&#x27;}
+
+
+## Delete işlemleri için delete methodu kullanılır.
+@router.delete(&quot;/delete/article&quot;, summary=&quot;Delete Article&quot;)
+def delete_article(article_id: int):
+    ## Veri tabanında işlem için oturum açan komut. Tüm işlemler bittikten sonra return den önce db.close() ile oturum düşürülebilir.
+    db = SessionLocal()
+
+    ## Kaydın istenilen alanına göre tek bir kayıt döndürmek üzere yapılan sorgu.
+    ## id yerine tablonun diğer alanları da kullanılabilir.
+    check_record = db.query(mArticles).filter(mArticles.id == article_id).first()
+
+    ## Kayıt bulunamazsa döndürülecek mesaj.
+    if not check_record: return {&#x27;status&#x27;: &#x27;article_not_found&#x27;}
+
+    ## Eşleşen kaydı silen komut.
+    db.delete(check_record)
+
+    ## Silme işlemini veritabanında kaydeden komut
+    db.commit()
+
+    ## Tabloyu kaydettikten sonra veri tabanını yenileyen komut (opsiyonel).
+    db.refresh()
+
+    ## İşlem sonrası döndürülecek mesaj.
+    return {&#x27;status&#x27;: &#x27;deleted&#x27;}
+
+# endregion</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="29d83d61-9e56-4cec-a9af-9ab9001073c5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">main.py<pre id="b41728dc-aa37-41cb-9df1-f97084d807b7" class="code code-wrap"><code># region Imports
+
+from fastapi import FastAPI
+from fastapi.openapi.docs import get_swagger_ui_html
+from fastapi.staticfiles import StaticFiles
+from starlette.middleware.cors import CORSMiddleware
+import routers
+
+# endregion
+
+# region App Options
+app = FastAPI(
+    debug=True,
+    docs_url=None,
+    redoc_url=None,
+    description=&quot;Fast API Example Article Project&quot;,
+    version=&quot;1.0.0&quot;, 
+    title=&quot;Article Project&quot;,
+    swagger_ui_parameters={&quot;syntaxHighlight.theme&quot;: &quot;obsidian&quot;, &quot;defaultModelsExpandDepth&quot;: -1},
+    contact={&quot;name&quot;: &quot;Doğancan A.&quot;, &quot;email&quot;: &quot;dogancannavci@makdos.com&quot;}
+)
+
+app.mount(&quot;/static&quot;, StaticFiles(directory=&quot;static&quot;), name=&quot;static&quot;)
+
+app.add_middleware(CORSMiddleware, allow_origins=[&quot;*&quot;], allow_credentials=True, allow_methods=[&quot;*&quot;], allow_headers=[&quot;*&quot;])
+# endregion
+
+# region Routers
+app.include_router(routers.router, tags=[&#x27;Article&#x27;], prefix=&quot;&quot;)
+
+
+# endregion
+
+# region HomePage
+@app.get(&quot;/&quot;, include_in_schema=False)
+async def homepage():
+    return get_swagger_ui_html(
+        openapi_url=app.openapi_url, 
+        title=&quot;Article Project&quot;, 
+        oauth2_redirect_url=app.swagger_ui_oauth2_redirect_url,
+        swagger_js_url=&quot;/static/swagger-ui-bundle.js&quot;, 
+        swagger_css_url=&quot;/static/swagger-ui.css&quot;,
+        swagger_favicon_url=&quot;/static/favicon.png&quot;
+    )
+# endregion</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8ee178a4-5c67-4638-949c-ed792d8f5455"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Paylaştığım static dosyasını da projenin ana dinizine eklememiz gerekiyor.</div></figure><p id="120db7f9-ea35-4921-84a2-178883904a5e" class="">
+</p></details></li></ul><ul id="f0a046bc-dd3d-45f3-a3df-6ae3e80fbd4a" class="toggle"><li><details open=""><summary><mark class="highlight-red"><strong>Projeyi Çalıştırma</strong></mark></summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="378915b1-8063-46df-a9c9-a95d92b9e43a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Projeyi çalıştırmak için gerekli komut<pre id="1e344e33-6043-4a91-ac9b-cd014231cce1" class="code code-wrap"><code>python3.9 -m uvicorn main:app --reload --host 0.0.0.0 --port 8000</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="86c0a2e9-9756-4eb6-a065-4f3d9f70fd8d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Daha sonra tarayıcınızda <mark class="highlight-red"><strong>0.0.0.0:8000</strong></mark> yazıp giderseniz yazdığınız apileri görüntüleyebilirsiniz</div></figure></details></li></ul><p id="6a5b2864-4ece-4326-95c1-7f22b3426ff9" class="">
+</p></div></article></body></html>

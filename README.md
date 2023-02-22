@@ -1,2 +1,2 @@
-# python_zero2hero_fastapi
-FastApi &amp; PostgreSQL &amp; requests ve HTML ile request ve response örnekleri
+# zero-to-hero-fastapi
+Required basic information to create Fast API project from the beginning.
